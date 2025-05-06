@@ -1,17 +1,17 @@
-import { createContext, useContext, useState} from "react";
+import { createContext, useContext, useState } from "react";
 
 const BookContext = createContext();
 
-export function BookProvider({children}){
-    const [books, setBooks] = useState([]);
+export function BookProvider({ children }) {
+  const [books, setBooks] = useState([]);
 
-    return(
-        <BookContext.Provider value={{books, setBooks}}>
-            {children}
-        </BookContext.Provider>
-    )
+  return (
+    <BookContext.Provider value={{ books, setBooks }}>
+      {children}
+    </BookContext.Provider>
+  );
 }
 
-export function useBooksContext(){
-    return useContext(BookContext)
+export function useBookContext() {
+  return useContext(BookContext);
 }

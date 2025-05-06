@@ -1,23 +1,22 @@
 import { useEffect } from "react";
-import { useBooksContext } from "../Context/BookContext";
+import { useBookContext } from "../Context/BookContext";
 
-export function useBooks(){
-    const {books, setBooks} = useBooksContext();
-    
-    useEffect(()=>{
-        const saved = localStorage .getItem("books");
-        if(saved) setBooks(JSON.parse(saved));
+export function useBooks() {
+  const { books, setBooks } = useBookContext();
 
-    },[]);
+  useEffect(() => {
+    const saved = localStorage.getItem("books");
+    if (saved) setBooks(JSON.parse(saved));
+  }, []);
 
-    useEffect(()=>{
-        localStorage.setItem("books", JSON.stringify(books));
-    },[books])
+  useEffect(() => {
+    localStorage.setItem("books", JSON.stringify(books));
+  }, [books]);
 
-    const addBooks = (book) => setBooks([...books, book]);
-    const updateBook = (updated)=>
-        setBooks(books.map((book) => book.id === updated.id ? updated : book));
-    const deleteBook = (id) => setBooks(books.filter((book) => book.id !== id));
+  const addBook = (book) => setBooks([...books, book]);
+  const updateBook = (updated) =>
+    setBooks(books.map((b) => (b.id === updated.id ? updated : b)));
+  const deleteBook = (id) => setBooks(books.filter((b) => b.id !== id));
 
-    return {books, addBooks, updateBook, deleteBook};
+  return { books, addBook, updateBook, deleteBook };
 }
